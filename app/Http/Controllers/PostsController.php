@@ -43,6 +43,8 @@ class PostsController extends Controller
             'body' => request('body'),
             'user_id' => auth()->user()->id,
         ]);
+
+        session()->flash('message', 'The post has been created successfully');
         return redirect('/posts');
     }
 }

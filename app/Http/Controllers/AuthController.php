@@ -30,12 +30,15 @@ class AuthController extends Controller
 
         auth()->login($user);
 
+        session()->flash('message', 'Welcome ' . $user->name . '! Thank you so much for signing up!');
+
         return redirect()->home();
 
     }
 
     public function logout() {
         auth()->logout();
+        session()->flash('message', 'You have successfully logged out');
         return redirect()->home();
     }
 
@@ -50,6 +53,8 @@ class AuthController extends Controller
                 'message' => 'invalid credentials',
             ]);
         }
+
+        session()->flash('message', 'Welcome back, ' . auth()->user()->name . '!');
 
         return redirect()->home();
     }
