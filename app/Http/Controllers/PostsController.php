@@ -16,7 +16,7 @@ class PostsController extends Controller
         $posts = Post::latest();
         $posts = request('month') ? $posts->whereMonth('created_at', Carbon::parse(request('month'))->month) : $posts;
         $posts = request('year') ? $posts->whereYear('created_at', request('year')) : $posts;
-        $posts = $posts->get();
+        $posts = $posts->paginate(5);
 
         return view('posts.index', compact('posts'));
     }

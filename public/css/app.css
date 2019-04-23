@@ -10812,6 +10812,7 @@ h6 {
   width: 100%;
   bottom: 0px;
   background-color: #343A40;
+  z-index: 2;
 }
 
 .blog-footer p {
@@ -10854,5 +10855,9 @@ textarea.form-control.post-input {
   z-index: 10;
   bottom: 20px;
   right: 20px;
+}
+
+.pagination {
+  justify-content: center;
 }
 
