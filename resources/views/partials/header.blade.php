@@ -23,7 +23,7 @@
 </div>
 </header>
 @if($message = session('message'))
-<div class="alert alert-success flash-message" role="alert">
+<div id="flash-message" class="alert alert-success flash-message" role="alert">
     <p>{{$message}}</p>
 </div>
 @endif
