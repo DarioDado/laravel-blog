@@ -10662,10 +10662,6 @@ a.text-dark:focus {
   }
 }
 
-body {
-  padding-bottom: 86px;
-}
-
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -10864,5 +10860,43 @@ textarea.form-control.post-input {
 .headline-image {
   height: auto;
   width: 100%;
+}
+
+#upload-img-preview {
+  height: auto;
+  width: 30%;
+  border-radius: 10px;
+}
+
+.blog-main {
+  padding-bottom: 100px;
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+
+.upload-btn {
+  display: block;
+  margin-top: 20px;
+}
+
+.file-name-label {
+  margin-left: 20px;
+  padding: 10px;
+}
+
+.upload.icon {
+  font-size: 15px;
 }
 
