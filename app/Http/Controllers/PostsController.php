@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use App\Asset;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class PostsController extends Controller
 {
@@ -13,6 +15,7 @@ class PostsController extends Controller
     }
     
     public function index() {
+        // dd(asset('storage/assets/image-test.jpg'));
         $posts = Post::latest();
         $posts = request('month') ? $posts->whereMonth('created_at', Carbon::parse(request('month'))->month) : $posts;
         $posts = request('year') ? $posts->whereYear('created_at', request('year')) : $posts;
@@ -31,17 +34,29 @@ class PostsController extends Controller
         return view('posts.create');
     }
 
-    public function store() {
+    public function store(Request $request) {
 
         $this->validate(request(), [
             'title' => 'required',
             'body' => 'required',
+            'file' => 'required',
         ]);
 
-        Post::create([
-            'title' => request('title'),
-            'body' => request('body'),
-            'user_id' => auth()->user()->id,
+        $file = $request->file('file');
+
+        //create new asset and save file to database
+        $asset = Asset::create([
+            'name' => $file->getClientOriginalName(),
+        ]);
+        $uniqueFilename = $asset->id . $file->getClientOriginalName();
+        $file->storeAs('assets', $uniqueFilename);
+        
+        //create new post
+        $post = Post::create([
+                'title' => request('title'),
+                'body' => request('body'),
+                'user_id' => auth()->user()->id,
+                'asset_id' => $asset->id,
         ]);
 
         session()->flash('message', 'The post has been created successfully');

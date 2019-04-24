@@ -5,7 +5,7 @@
 <h1>Create a new post</h1>
 <hr>
 
-<form method="POST" action="/posts">
+<form id="create-post-form" method="POST" action="/posts#create-post-form" enctype="multipart/form-data">
     <div class="form-group">
         {{csrf_field()}}
         <label for="title">Title</label>
@@ -17,7 +17,7 @@
     </div>
     <div class="upload-btn-wrapper form-group">
         <button class="ui secondary basic button">Select a file</button>
-        <input id="post-headline-image" type="file"  name="myfile" accept="image/*"/>
+        <input id="post-headline-image" type="file"  name="file" accept="image/*"/>
         <div  class="ui label file-name-label">
             <i class="upload icon"></i>
         </div>
