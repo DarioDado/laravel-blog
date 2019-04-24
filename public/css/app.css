@@ -10861,3 +10861,8 @@ textarea.form-control.post-input {
   justify-content: center;
 }
 
+.headline-image {
+  height: auto;
+  width: 100%;
+}
+
