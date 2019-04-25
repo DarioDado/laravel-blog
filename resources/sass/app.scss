@@ -8,6 +8,7 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -228,3 +229,15 @@ textarea.form-control.post-input {
 }
 
 // upload section end 
+
+
+
+#content {
+  min-height: 100px;
+  }
+.ui.grid{
+  padding: 0 !important;
+  }
+.pushable.segment{
+  margin: 0 !important;
+  }
