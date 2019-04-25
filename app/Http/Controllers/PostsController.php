@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Asset;
+use App\PostCategory;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
@@ -31,7 +32,8 @@ class PostsController extends Controller
 
     public function create() {
 
-        return view('posts.create');
+        $categories = PostCategory::all();
+        return view('posts.create', compact('categories'));
     }
 
     public function store(Request $request) {
@@ -40,6 +42,7 @@ class PostsController extends Controller
             'title' => 'required',
             'body' => 'required',
             'file' => 'required',
+            'category' => 'required',
         ]);
 
         $file = $request->file('file');
@@ -57,6 +60,7 @@ class PostsController extends Controller
                 'body' => request('body'),
                 'user_id' => auth()->user()->id,
                 'asset_id' => $asset->id,
+                'category_id' => request('category'),
         ]);
 
         session()->flash('message', 'The post has been created successfully');

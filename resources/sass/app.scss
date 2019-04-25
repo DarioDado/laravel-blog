@@ -232,12 +232,8 @@ textarea.form-control.post-input {
 
 
 
-#content {
-  min-height: 100px;
-  }
-.ui.grid{
-  padding: 0 !important;
-  }
-.pushable.segment{
-  margin: 0 !important;
-  }
+.category-select {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
