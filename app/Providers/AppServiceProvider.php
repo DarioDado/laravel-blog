@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use App\Post;
+use App\PostCategory;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -33,6 +34,11 @@ class AppServiceProvider extends ServiceProvider
                 ->orderByRaw('min(created_at) DESC')
                 ->get();
             $view->with('archive', $archive);
+        });
+
+        view()->composer('partials.header', function($view){
+            $categories = PostCategory::all();
+            $view->with('categories', $categories);
         });
     }
 }

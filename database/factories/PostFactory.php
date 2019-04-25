@@ -9,9 +9,11 @@ $autoIncrement = autoIncrement();
 
 $factory->define(Post::class, function (Faker $faker) use ($autoIncrement) {
     $date = $faker->dateTimeBetween($startDate = '-1 years', $endDate = 'now');
+    $categories = config('junior.postCategories');
     $autoIncrement->next();
     return [
         'user_id' => $faker->numberBetween(1, 10),
+        'category_id' => $faker->numberBetween(1, count($categories)),
         'asset_id' => $autoIncrement->current(),
         'title' => $faker->sentence(4),
         'body' => $faker->paragraph(30),
