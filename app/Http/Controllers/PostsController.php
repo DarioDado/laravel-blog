@@ -15,7 +15,6 @@ class PostsController extends Controller
     }
     
     public function index() {
-        // dd(asset('storage/assets/image-test.jpg'));
         $posts = Post::latest();
         $posts = request('month') ? $posts->whereMonth('created_at', Carbon::parse(request('month'))->month) : $posts;
         $posts = request('year') ? $posts->whereYear('created_at', request('year')) : $posts;
