@@ -15,7 +15,7 @@
         <textarea name="body" id="" cols="20" rows="5" class="form-control post-input" id="body" placeholder="Enter post body"></textarea>
     </div>
     <div class="form-group category-select">
-        <label>Select action</label>
+        <label>Select category</label>
         <select name="category" class="ui dropdown" id="select">
             <option value="">---</option>
             @foreach($categories as $category)

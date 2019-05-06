@@ -36853,7 +36853,13 @@ function readFileInput(input) {
 
 $("#post-headline-image").change(function () {
   readFileInput(this);
-});
+}); //search
+
+$('#search-icon').click(onSearch);
+
+function onSearch() {
+  $('#search-form').submit();
+}
 
 /***/ }),
 

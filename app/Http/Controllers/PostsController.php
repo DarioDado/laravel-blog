@@ -12,11 +12,12 @@ use Illuminate\Support\Facades\Storage;
 class PostsController extends Controller
 {
     public function __construct() {
-        $this->middleware('auth')->except(['index','show']);
+        $this->middleware('auth')->except(['index','show','search']);
     }
     
     public function index() {
         $posts = Post::latest();
+        $posts = request('term') ? $posts->where('title', 'like', '%' . request('term') . '%')->orWhere('body', 'like', '%' . request('term') . '%') : $posts;
         $posts = request('month') ? $posts->whereMonth('created_at', Carbon::parse(request('month'))->month) : $posts;
         $posts = request('year') ? $posts->whereYear('created_at', request('year')) : $posts;
         $posts = request('category') ? $posts->where('category_id', request('category')) : $posts;
