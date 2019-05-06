@@ -10922,3 +10922,7 @@ textarea.form-control.post-input {
   margin-top: 100px;
 }
 
+.note-editable {
+  height: 300px;
+}
+
