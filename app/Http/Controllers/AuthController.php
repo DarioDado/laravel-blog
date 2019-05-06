@@ -17,20 +17,22 @@ class AuthController extends Controller
 
     public function register() {
         $this->validate(request(), [
-            'name' => 'required',
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
             'email' => 'required|email',
             'password' => 'required|confirmed',
         ]);
 
         $user = User::create([
-            'name' => request('name'),
+            'first_name' => request('first_name'),
+            'last_name' => request('last_name'),
             'email' => request('email'),
             'password' => bcrypt(request('password')),
         ]);
 
         auth()->login($user);
 
-        session()->flash('message', 'Welcome ' . $user->name . '! Thank you so much for signing up!');
+        session()->flash('message', 'Welcome ' . $user->first_name . '! Thank you so much for signing up!');
 
         return redirect()->home();
 
@@ -54,7 +56,7 @@ class AuthController extends Controller
             ]);
         }
 
-        session()->flash('message', 'Welcome back, ' . auth()->user()->name . '!');
+        session()->flash('message', 'Welcome back, ' . auth()->user()->first_name . '!');
 
         return redirect()->home();
     }

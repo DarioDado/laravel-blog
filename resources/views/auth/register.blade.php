@@ -8,8 +8,12 @@
 <form method="POST" action="/register">
     {{csrf_field()}}
     <div class="form-group">
-        <label for="title">Name</label>
-        <input type="text" class="form-control" id="name"  placeholder="Enter your full name" name="name">
+        <label for="title">First name</label>
+        <input type="text" class="form-control" id="first_name"  placeholder="Enter your first name" name="first_name">
+    </div>
+    <div class="form-group">
+        <label for="title">Last name</label>
+        <input type="text" class="form-control" id="last_name"  placeholder="Enter your last name" name="last_name">
     </div>
     <div class="form-group">
         <label for="title">Email</label>

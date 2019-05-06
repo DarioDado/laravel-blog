@@ -14,7 +14,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24" focusable="false"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg>
     </a>
     @if (Auth::check())
-    <a class="btn btn-sm btn-outline-secondary header-right-button" href="">{{Auth::user()->name}}</a>
+    <a class="btn btn-sm btn-outline-secondary header-right-button" href="">{{Auth::user()->first_name}}</a>
     <a class="btn btn-sm btn-outline-secondary" href="/logout">Logout</a>
     @else
     <a class="btn btn-sm btn-outline-secondary header-right-button" href="/login">Login</a>
