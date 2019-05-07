@@ -16,7 +16,7 @@
                         <button id="delete-button" class="btn btn-danger">Delete</button>
                         <button id="delete-confirmation-button" class="btn btn-danger">Confirm</button>
                 </form>
-                <a id="edit-button" href="#" class="btn btn-secondary">Edit</a>
+                <a id="edit-button" href="/posts/{{$post->id}}/edit" class="btn btn-secondary">Edit</a>
         </div>
         @endif
 </div><!-- /.blog-post -->

@@ -68,6 +68,44 @@ class PostsController extends Controller
         return redirect('/posts');
     }
 
+    public function edit(Post $post) {
+        $categories = PostCategory::all();
+        return view('posts.edit', compact('categories', 'post'));
+    }
+
+    public function update(Post $post, Request $request) {
+        //validate inputs
+        $this->validate(request(), [
+            'title' => 'required',
+            'category' => 'required',
+        ]);
+
+        $file = $request->file('file') ? $request->file('file') : null;
+        
+        //set new values
+        $post->title = request('title');
+        $post->body = request('body');
+        $post->category_id = request('category');
+
+        //delete old and create headline image if asset is updated
+        if($file) {
+            Storage::delete('assets/' . $post->asset->id . $post->asset->name);
+            $post->asset->delete();
+            $asset = Asset::create([
+                'name' => $file->getClientOriginalName(),
+            ]);
+            $uniqueFilename = $asset->id . $file->getClientOriginalName();
+            $file->storeAs('assets', $uniqueFilename);
+            $post->asset_id = $asset->id;
+        }
+
+        //update post
+        $post->save();
+
+        session()->flash('message', 'The post has been updated successfully');
+        return redirect('/posts/' . $post->id);
+    }
+
     public function delete(Post $post) {                  
 
         //delete related comments
