@@ -10926,3 +10926,17 @@ textarea.form-control.post-input {
   height: 300px;
 }
 
+#delete-confirmation-button {
+  display: none;
+}
+
+.form-wraper {
+  display: flex;
+  justify-content: space-around;
+}
+
+.form-wraper button,
+.form-wraper a {
+  width: 100px;
+}
+

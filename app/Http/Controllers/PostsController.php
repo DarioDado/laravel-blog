@@ -67,4 +67,19 @@ class PostsController extends Controller
         session()->flash('message', 'The post has been created successfully');
         return redirect('/posts');
     }
+
+    public function delete(Post $post) {                  
+
+        //delete related comments
+        $post->comments->each->delete();
+        
+        //delete related asset
+        Storage::delete('assets/' . $post->asset->id . $post->asset->name);
+        $post->asset->delete();
+        
+        //delete post
+        $post->delete();
+        session()->flash('message', 'The post has been deleted successfully');
+        return redirect('/posts');
+    }
 }

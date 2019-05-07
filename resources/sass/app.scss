@@ -258,3 +258,16 @@ textarea.form-control.post-input {
 .note-editable  {
   height: 300px;
 }
+
+//delete and edit forms
+#delete-confirmation-button {
+  display: none;
+}
+
+.form-wraper {
+  display: flex;
+  justify-content: space-around;
+  button, a {
+    width: 100px;
+  }
+}

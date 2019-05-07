@@ -1,5 +1,5 @@
 @if(Auth::check())
-<form method="POST" action="/comments">
+<form id="comments-form" method="POST" action="/comments#comments-form">
     {{csrf_field()}}
     <input type="hidden" value="{{$post->id}}" name="post_id">
     <div class="form-group">
