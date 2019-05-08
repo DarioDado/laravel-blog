@@ -11,6 +11,7 @@
 |
 */
 
+Route::get('/users/{user}', 'UsersController@show');
 
 Route::get('/', 'PostsController@index');
 Route::get('/posts', 'PostsController@index')->name('home');

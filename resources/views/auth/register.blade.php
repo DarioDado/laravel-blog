@@ -5,7 +5,7 @@
 <h1>Sign up</h1>
 <hr>
 
-<form method="POST" action="/register">
+<form method="POST" action="/register" enctype="multipart/form-data">
     {{csrf_field()}}
     <div class="form-group">
         <label for="title">First name</label>
@@ -27,6 +27,18 @@
         <label for="password_confirmation">Password confirmation</label>
         <input type="password" class="form-control" id="password_confirmation"  placeholder="Confirm your password" name="password_confirmation">
     </div>
+
+    <div class="upload-btn-wrapper form-group">
+        <button class="ui secondary basic button">Select a profil image</button>
+        <input id="post-headline-image" type="file"  name="file" accept="image/*"/>
+        <div  class="ui label file-name-label">
+            <i class="upload icon"></i>
+        </div>
+    </div>
+    <div class="form-group">
+        <img id="upload-img-preview" src="" alt="">
+    </div>
+
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Sign up</button>
     </div>

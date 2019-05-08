@@ -17,13 +17,24 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(User::class, function (Faker $faker) {
+$autoIncrementUserAssets = autoIncrementUserAssets();
+
+$factory->define(User::class, function (Faker $faker) use ($autoIncrementUserAssets) {
+    $autoIncrementUserAssets->next();
     return [
         'first_name' => $faker->firstName,
         'last_name' => $faker->lastName,
+        'asset_id' => $autoIncrementUserAssets->current(),
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
         'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
         'remember_token' => Str::random(10),
     ];
 });
+
+function autoIncrementUserAssets()
+{
+    for ($i = 30; $i < 1000; $i++) {
+        yield $i;
+    }
+}

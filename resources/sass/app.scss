@@ -271,3 +271,25 @@ textarea.form-control.post-input {
     width: 100px;
   }
 }
+
+//profil area
+.profil-wraper {
+  display: flex;
+  flex-direction: column;
+  .avatar {
+    display: flex;
+    align-self: center;
+    height: auto;
+    width: 70%;
+    border-radius: 10px;
+  }
+  .profil-info {
+    text-align: center;
+    margin-top: 20px;
+  }
+}
+
+.sidebar-about, 
+.sidebar-archives {
+  text-align: center;
+}

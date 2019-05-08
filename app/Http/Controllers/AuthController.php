@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Asset;
 
 class AuthController extends Controller
 {
@@ -19,13 +20,24 @@ class AuthController extends Controller
         $this->validate(request(), [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
+            'file' => 'required',
             'email' => 'required|email',
             'password' => 'required|confirmed',
         ]);
 
+        $file = request()->file('file');
+
+        //create new asset and save file to database
+        $asset = Asset::create([
+            'name' => $file->getClientOriginalName(),
+        ]);
+        $uniqueFilename = $asset->id . $file->getClientOriginalName();
+        $file->storeAs('assets', $uniqueFilename);
+
         $user = User::create([
             'first_name' => request('first_name'),
             'last_name' => request('last_name'),
+            'asset_id' => $asset->id,
             'email' => request('email'),
             'password' => bcrypt(request('password')),
         ]);

@@ -29,10 +29,17 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         view()->composer('partials.sidebar', function($view){
-            $archive = Post::selectRaw('year(created_at) as year,monthname(created_at) as month,count(*) as published')
-                ->groupBy('year','month')
-                ->orderByRaw('min(created_at) DESC')
-                ->get();
+            $archive = request()->segment(1) === 'users' && request()->segment(2)
+                ? Post::selectRaw('year(created_at) as year,monthname(created_at) as month,count(*) as published')
+                    ->where('user_id', request()->segment(2)) 
+                    ->groupBy('year','month')
+                    ->orderByRaw('min(created_at) DESC')
+                    ->get()
+                : Post::selectRaw('year(created_at) as year,monthname(created_at) as month,count(*) as published')
+                    ->groupBy('year','month')
+                    ->orderByRaw('min(created_at) DESC')
+                    ->get();
+
             $view->with('archive', $archive);
         });
 
