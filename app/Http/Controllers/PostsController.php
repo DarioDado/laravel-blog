@@ -11,10 +11,18 @@ use Illuminate\Support\Facades\Storage;
 
 class PostsController extends Controller
 {
+    /**
+     * Constructor
+     */
     public function __construct() {
         $this->middleware('auth')->except(['index','show','search']);
     }
     
+    /**
+     * Fetch posts and render posts index page
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index() {
         $posts = Post::latest();
         $posts = request('term') ? $posts->where('title', 'like', '%' . request('term') . '%')->orWhere('body', 'like', '%' . request('term') . '%') : $posts;
@@ -26,17 +34,34 @@ class PostsController extends Controller
         return view('posts.index', compact('posts'));
     }
 
+    /**
+     * Fetch single post and render post-show page
+     *
+     * @param Post $post
+     * @return \Illuminate\Http\Response
+     */
     public function show(Post $post) {                  
 
         return view('posts.show', compact('post'));
     }
 
+    /**
+     * Render create-post page
+     *
+     * @return void
+     */
     public function create() {
 
         $categories = PostCategory::all();
         return view('posts.create', compact('categories'));
     }
 
+    /**
+     * Store new post and related asset, redirect to posts index page
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request) {
 
         $this->validate(request(), [
@@ -68,11 +93,24 @@ class PostsController extends Controller
         return redirect('/posts');
     }
 
+    /**
+     * Render edit post page
+     *
+     * @param Post $post
+     * @return \Illuminate\Http\Response
+     */
     public function edit(Post $post) {
         $categories = PostCategory::all();
         return view('posts.edit', compact('categories', 'post'));
     }
 
+    /**
+     * Update post data and related asset, redirect to post show page
+     *
+     * @param Post $post
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
     public function update(Post $post, Request $request) {
         //validate inputs
         $this->validate(request(), [
@@ -106,6 +144,12 @@ class PostsController extends Controller
         return redirect('/posts/' . $post->id);
     }
 
+    /**
+     * Delete post and related asset, redirect to posts index page
+     *
+     * @param Post $post
+     * @return \Illuminate\Http\Response
+     */
     public function delete(Post $post) {                  
 
         //delete related comments

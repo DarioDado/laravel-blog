@@ -8,14 +8,29 @@ use App\Asset;
 
 class AuthController extends Controller
 {
+    /**
+     * Render login page
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function loginPage() {
         return view('auth.login');
     }
 
+    /**
+     * Render registration page
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function registerPage() {
         return view('auth.register');
     }
 
+    /**
+     * Create new user and related asset, log him in and redirect to home page
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function register() {
         $this->validate(request(), [
             'first_name' => ['required', 'string', 'max:255'],
@@ -50,12 +65,22 @@ class AuthController extends Controller
 
     }
 
+    /**
+     * Log user out and redirect to home page
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function logout() {
         auth()->logout();
         session()->flash('message', 'You have successfully logged out');
         return redirect()->home();
     }
 
+    /**
+     * Log user in and redirect to home page
+     *
+     * @return void
+     */
     public function login() {
         $this->validate(request(), [
             'email' => 'required|email',

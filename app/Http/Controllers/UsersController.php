@@ -11,10 +11,19 @@ use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
 {
+    /**
+     * Constructor
+     */
     public function __construct() {
         $this->middleware('auth')->except(['show',]);
     }
 
+    /**
+     * Fetch user, related posts and render user show page
+     *
+     * @param User $user
+     * @return \Illuminate\Http\Response
+     */
     public function show(User $user) {
         $posts = Post::latest()->where('user_id', $user->id);
         $posts = request('month') ? $posts->whereMonth('created_at', Carbon::parse(request('month'))->month) : $posts;
@@ -24,11 +33,23 @@ class UsersController extends Controller
         return view('users.show', compact('posts','user'));
     }
 
+    /**
+     * Render edit user page
+     *
+     * @param User $user
+     * @return \Illuminate\Http\Response
+     */
     public function edit(User $user) {
 
         return view('users.edit', compact('user'));
     }
 
+    /**
+     * Update user data and related asset, redirect to user show page
+     *
+     * @param User $user
+     * @return \Illuminate\Http\Response
+     */
     public function update(User $user) {
         //validate inputs
         $this->validate(request(), [
