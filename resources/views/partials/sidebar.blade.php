@@ -4,6 +4,9 @@
     <img src="{{ asset('storage/assets/' . $user->asset->id . $user->asset->name . '?' . now()->timestamp) }}" alt="profil image" class="avatar">
     <div class="profil-info">
         <h3>{{$user->first_name}} {{$user->last_name}}</h3>
+        @if(Auth::check() && Auth::user()->id === (int)Request::segment(2))
+        <a href="/users/{{Request::segment(2)}}/edit" class="btn btn-secondary">Edit profile</a>
+        @endif
     </div>
 </div>
 @endif
@@ -13,7 +16,9 @@
 </div>
 
 <div class="p-4 sidebar-archives">
+    @if(count($archive) > 0)
     <h4 class="font-italic">Archives</h4>
+    @endif
     <ol class="list-unstyled mb-0">
         @foreach($archive as $stats)
             @if(Request::segment(1) === 'users' && Request::segment(2))

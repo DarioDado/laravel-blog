@@ -3,10 +3,10 @@
 
 @section('content')
 
-    @if (request('term') && count($posts) < 1)
+    @if (count($posts) < 1)
     <div class="no-result">
         <p><i class="meh outline icon no-result-icon"></i></p>
-        <p class="no-result-msg">We couldn't find any post matching your search</p>
+        <p class="no-result-msg">No posts yet</p>
     </div>
     @endif
     

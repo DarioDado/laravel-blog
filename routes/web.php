@@ -12,6 +12,8 @@
 */
 
 Route::get('/users/{user}', 'UsersController@show');
+Route::get('/users/{user}/edit', 'UsersController@edit');
+Route::put('/users/{user}', 'UsersController@update');
 
 Route::get('/', 'PostsController@index');
 Route::get('/posts', 'PostsController@index')->name('home');
